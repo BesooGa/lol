@@ -12,6 +12,16 @@ from user_agent import *
 from help import *
 from config import *
 from threading import Thread
+import datetime #Edit Levi @Z_V_M love 
+now = datetime.datetime.today()
+mm = str(now.month)
+dd = str(now.day)
+yyyy = str(now.year)
+hour = str(now.hour)
+mi = str(now.minute)
+ss = str(now.second)
+Hussenk=(yyyy + "/" + mm + "/" + dd)
+Levii=( hour + ":" + mi + ":" + ss)
 
 a = 'qwertyuiopassdfghjklzxcvbnm'
 b = '1234567890'
@@ -192,25 +202,25 @@ def gen_user(choice):
             pass
     return username
 
-@fifthon.on(events.NewMessage(outgoing=True, pattern=r"\.تشيكر"))
+@sedthon.on(events.NewMessage(outgoing=True, pattern=r"\.تشيكر"))
 async def _(event):
     if ispay2[0] == "yes":
         await event.edit(tele_checker)
         
-@fifthon.on(events.NewMessage(outgoing=True, pattern=r"\.اليوزرات المبندة"))
+@sedthon.on(events.NewMessage(outgoing=True, pattern=r"\.اليوزرات المبندة"))
 async def _(event):
     if ispay2[0] == "yes":
-        await fifthon.send_file(event.chat_id, 'banned.txt')
+        await sedthon.send_file(event.chat_id, 'banned.txt')
 
 
-@fifthon.on(events.NewMessage(outgoing=True, pattern=r"\.الانواع"))
+@sedthon.on(events.NewMessage(outgoing=True, pattern=r"\.الانواع"))
 async def _(event):
     if ispay2[0] == "yes":
         await event.edit(tele_checker2)
 # صيد عدد نوع قناة
 
 
-@fifthon.on(events.NewMessage(outgoing=True, pattern=r"\.صيد (.*)"))
+@sedthon.on(events.NewMessage(outgoing=True, pattern=r"\.صيد (.*)"))
 async def _(event):
     if ispay2[0] == "yes":
         isclaim.clear()
@@ -221,7 +231,7 @@ async def _(event):
         trys = 0
         await event.edit(f"حسناً سأفحص نوع `{choice}` من اليوزرات على `{ch}` , بعدد `{msg[0]}` من المحاولات !")
 
-        @fifthon.on(events.NewMessage(outgoing=True, pattern=r"\.حالة الصيد"))
+        @sedthon.on(events.NewMessage(outgoing=True, pattern=r"\.حالة الصيد"))
         async def _(event):
             if ispay2[0] == "yes":
                 if "on" in isclaim:
@@ -246,26 +256,26 @@ async def _(event):
             if "Available" in isav:
                 await asyncio.sleep(1)
                 try:
-                    await fifthon(functions.channels.UpdateUsernameRequest(
+                    await sedthon(functions.channels.UpdateUsernameRequest(
                         channel=ch, username=username))
                     await event.client.send_message(event.chat_id, f'''
 - Done ↣ (@{username})
-- By ↣ @iziii - @zbaak !
+- By ↣ @S_Y_V !
 - Hunting History ↣ {Hussenk}
 - Hunting Hour ↣ {Levii}
     ''')
                     break
-                except telethon.errors.rpcerrorlist.UsernameInvalidError:
+                except Exception as c:
                     with open("banned.txt", "a") as f:
-                        f.write(f"\n{username}")
+                        f.write(f"{username}-{c}\n")
                 except Exception as eee:
-                    await fifthon.send_message(event.chat_id, f'''خطأ مع {username}
+                    await sedthon.send_message(event.chat_id, f'''خطأ مع {username}
     الخطأ :
     {str(eee)}''')
                     if "A wait of" in str(eee):
                         break
                     else:
-                        await fifthon.send_message(event.chat.id, " اجاك متاح !")
+                        await sedthon.send_message(event.chat.id, "سأستمر بلفحص !")
             else:
                 pass
             trys += 1
@@ -273,9 +283,9 @@ async def _(event):
         isclaim.clear()
         isclaim.append("off")
         trys = ""
-        await event.client.send_message(event.chat_id, "اجاك متاح")
+        await event.client.send_message(event.chat_id, "تم الانتهاء من الفحص")
         
-@fifthon.on(events.NewMessage(outgoing=True, pattern=r"\.تثبيت (.*)"))
+@sedthon.on(events.NewMessage(outgoing=True, pattern=r"\.تثبيت (.*)"))
 async def _(event):
     if ispay2[0] == "yes":
         trys = 0
@@ -288,7 +298,7 @@ async def _(event):
             ch = str(msg[1])
             await event.edit(f"حسناً سأحاول تثبيت `{username}` على `{ch}` , بعدد `{msg[0]}` من المحاولات !")
 
-            @fifthon.on(events.NewMessage(outgoing=True, pattern=r"\.حالة التثبيت التلقائي"))
+            @sedthon.on(events.NewMessage(outgoing=True, pattern=r"\.حالة التثبيت التلقائي"))
             async def _(event):
                 if "on" in isauto:
                     msg = await event.edit(f"التثبيت وصل لـ({trys}) من المحاولات")
@@ -306,11 +316,11 @@ async def _(event):
                 isav = que.get()
                 if "Available" in isav:
                     try:
-                        await fifthon(functions.channels.UpdateUsernameRequest(
+                        await sedthon(functions.channels.UpdateUsernameRequest(
                             channel=ch, username=username))
                         await event.client.send_message(event.chat_id, f'''
 - Done ↣ (@{username})
-- By ↣ @iziii - @zbaak !
+- By ↣ @S_Y_V !
 - Hunting History ↣ {Hussenk}
 - Hunting Hour ↣ {Levii}
     ''')
@@ -320,7 +330,7 @@ async def _(event):
                         break
                     except Exception as eee:
 
-                        await fifthon.send_message(event.chat_id, f'''خطأ مع {username}
+                        await sedthon.send_message(event.chat_id, f'''خطأ مع {username}
     الخطأ :
     {str(eee)}''')
                         if "A wait of" in str(eee):
@@ -333,29 +343,29 @@ async def _(event):
             trys = ""
             isclaim.clear()
             isclaim.append("off")
-            await fifthon.send_message(event.chat_id, "تم الانتهاء من التثبيت التلقائي")
+            await sedthon.send_message(event.chat_id, "تم الانتهاء من التثبيت التلقائي")
         if msg[0] == "يدوي":  # تثبيت يدوي يوزر قناة
             await event.edit(f"حسناً سأحاول تثبيت `{username}` على `{ch}` !")
             msg = ("".join(event.text.split(maxsplit=1)[1:])).split(" ", 1)
             username = str(msg[0])
             ch = str(msg[1])
             try:
-                await fifthon(functions.channels.UpdateUsernameRequest(
+                await sedthon(functions.channels.UpdateUsernameRequest(
                     channel=ch, username=username))
                 await event.client.send_message(event.chat_id, f'''
 - Done ↣ (@{username})
-- By ↣ @iziii - @zbaak !
+- By ↣ @S_Y_V !
 - Hunting History ↣ {Hussenk}
 - Hunting Hour ↣ {Levii}
     ''')
             except telethon.errors.rpcerrorlist.UsernameInvalidError:
                 await event.client.send_message(event.chat_id, f"مبند `{username}` ❌❌")
             except Exception as eee:
-                await fifthon.send_message(event.chat_id, f'''خطأ مع {username}
+                await sedthon.send_message(event.chat_id, f'''خطأ مع {username}
     الخطأ :
     {str(eee)}''')
 Threads=[] 
-for t in range(100):
+for t in range(20):
     x = threading.Thread(target=_)
     le = threading.Thread(target=gen_user)
     x.start()
